@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale-1">
+<title>The Atlas Hut — a mountain refuge</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500..800&display=swap">
+<style>
+:root {
+  --ground: #eceae4;
+  --ground-deep: #dbd8cf;
+  --ink: #141412;
+  --ink-soft: #5c5a52;
+  --accent: #b02e24;
+  --field: #dbd8cf;
+  --on-accent: #eceae4;
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-text: 'Archivo', system-ui, sans-serif;
+  --margin: clamp(16px, 4vw, 32px);
+  --measure: 42rem;
+  --section-gap: clamp(80px, 12vw, 200px);
+  --inner-gap: clamp(16px, 2vw, 24px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: clamp(1rem, 1vw + 0.875rem, 1.25rem);
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6vw + 1rem, 6.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--inner-gap);
+  font-weight: 700;
+}
+p, blockquote { max-width: var(--measure); margin: 0 0 var(--inner-gap); }
+.statement { font-size: clamp(1.4rem, 2.5vw + 0.75rem, 2.25rem); line-height: 1.25; max-width: var(--measure); }
+.caption { font-size: 0.85rem; line-height: 1.4; color: var(--ink-soft); }
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+button, .button {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 0;
+  padding: 0.9em 1.6em;
+  font-family: var(--font-text);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--on-accent); }
+.wrap { margin-inline: auto; padding-inline: var(--margin); max-width: 80rem; }
+.section { padding-block: var(--section-gap); }
+.plate { margin: 0; }
+.plate img { width: 100%; height: 100%; object-fit: cover; }
+[data-motion] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+[data-motion].in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-motion] { opacity: 1; transform: none; transition: none; }
+}
+
+/* window hero */
+.hero-window {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--section-gap) var(--margin);
+  background: var(--field);
+}
+.hero-window .frame {
+  position: absolute;
+  inset: var(--margin);
+  border: 4px solid var(--ink);
+  pointer-events: none;
+}
+.hero-window .content { position: relative; z-index: 1; }
+.hero-window h1 { max-width: 100%; }
+
+/* annotated plates */
+.plates { display: grid; grid-template-columns: 1fr 1fr; gap: var(--section-gap); align-items: start; }
+.plates .plate { position: relative; }
+.plates .plate img { width: 100%; height: auto; }
+.plates .annotation {
+  position: absolute;
+  font-size: 0.85rem;
+  color: var(--ink);
+  background: var(--ground);
+  padding: 4px 8px;
+  border: 1px solid var(--ink);
+}
+.plates .annotation::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  width: 20px;
+  height: 1px;
+  background: var(--ink);
+}
+
+/* ledger entries */
+.entries { list-style: none; padding: 0; margin: 0; max-width: 60rem; }
+.entries li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+}
+.entries li + li { background: var(--field); padding-left: 16px; padding-right: 16px; }
+.entries li:nth-child(odd) { background: var(--ground-deep); padding-left: 16px; padding-right: 16px; }
+.entries .price { font-weight: 600; white-space: nowrap; }
+
+/* margin note */
+.margin-note { display: grid; grid-template-columns: 1fr 3fr; gap: var(--section-gap); }
+.margin-note .margin { font-size: 0.85rem; color: var(--ink-soft); }
+.margin-note .content { max-width: var(--measure); }
+
+/* window cta */
+.window-cta {
+  background: var(--field);
+  padding: var(--section-gap) var(--margin);
+  text-align: center;
+}
+.window-cta h2 { font-size: clamp(2rem, 4vw + 1rem, 4rem); }
+.window-cta p { max-width: var(--measure); margin: 0 auto var(--inner-gap); }
+
+/* footer */
+footer { background: var(--ground-deep); padding: var(--section-gap) var(--margin); }
+footer .name { font-family: var(--font-display); font-size: clamp(2rem, 5vw + 1rem, 5rem); font-weight: 700; margin: 0 0 var(--inner-gap); }
+footer .credits { font-size: 0.85rem; color: var(--ink-soft); max-width: 60rem; }
+
+@media (max-width: 768px) {
+  .plates { grid-template-columns: 1fr; }
+  .margin-note { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero-window" data-motion style="--i:0">
+  <div class="frame"></div>
+  <div class="content">
+    <h1>The Atlas Hut</h1>
+    <p class="statement">A refuge above the lake, open June to September, reachable by ferry and trail.</p>
+  </div>
+</header>
+
+<section class="section wrap" data-motion style="--i:1">
+  <h2>The way in</h2>
+  <div class="plates">
+    <div class="plate">
+      <img src="web/sm-blue-sail-blue-water-ov-3b2408d3-c5c5-42f9-8476-59961c576547.jpg" alt="A sailboat on the lake">
+      <span class="annotation" style="top: 20%; left: 10%;">Ferry — 40 min, 3 daily</span>
+    </div>
+    <div class="plate">
+      <img src="web/sm-Old-hut-coverted-in-snow-in-the-Italian-alps-ov-46981402-2b47-482b-a4a0-24bc55ef7f0c.jpg" alt="A mountain hut in snow">
+      <span class="annotation" style="top: 30%; left: 15%;">Trail — 2 hours, marked</span>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" data-motion style="--i:2">
+  <h2>What is provided</h2>
+  <ul class="entries">
+    <li><span>A bunk, a blanket, a pillow</span><span class="price">25€ / night</span></li>
+    <li><span>A hot meal, twice daily</span><span class="price">12€</span></li>
+    <li><span>Water, firewood, a dry room</span><span class="price">included</span></li>
+    <li><span>Guided sunrise walk, weather permitting</span><span class="price">8€</span></li>
+  </ul>
+</section>
+
+<section class="section wrap" data-motion style="--i:3">
+  <div class="margin-note">
+    <div class="margin">
+      <p>Open June 15 — September 15.</p>
+      <p>Capacity: 24 bunks.</p>
+      <p>No electricity. No phone signal.</p>
+    </div>
+    <div class="content">
+      <h2>Questions</h2>
+      <p><strong>Can I book ahead?</strong><br>Yes — by postcard only. We check the box on Tuesdays.</p>
+      <p><strong>Is there water?</strong><br>From the spring, 200 metres above. We boil it. You should too.</p>
+      <p><strong>What if the weather turns?</strong><br>The hut stays open. The ferry does not. Plan for an extra night.</p>
+      <p><strong>Dogs?</strong><br>Yes, but they sleep in the wood room.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" data-motion style="--i:4">
+  <div class="hang" style="display:flex;flex-wrap:wrap;gap:var(--inner-gap)">
+    <figure style="flex:2 1 300px;margin:0">
+      <img src="web/sm-Mountainous-Landscape-Snow-Louis-Fleckenstein-ov-8b7cbd5b-8ff9-417d-8f75-4af7efabc5fd.jpg" alt="Mountainous landscape in snow">
+      <figcaption class="caption">The view from the door, on a clear morning.</figcaption>
+    </figure>
+    <figure style="flex:1 1 200px;margin:0">
+      <img src="web/sm-Compass-ov-3f2a833e-1797-429d-9142-13c96063840c.jpg" alt="A compass">
+      <figcaption class="caption">The compass on the wall, pointing at the door.</figcaption>
+    </figure>
+    <figure style="flex:1 1 200px;margin:0">
+      <img src="web/sm-See-the-Start-of-some-Avalanches-ov-68bcd730-14c2-469d-a3be-6998ff62959f.jpg" alt="Avalanche starting on a slope">
+      <figcaption class="caption">The slope we watch, and the reason for the season.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="window-cta" data-motion style="--i:5">
+  <h2>Write a postcard</h2>
+  <p>Tell us how many, and when. We will write back if there is room.</p>
+  <a class="button" href="mailto:stay@atlashut.example?subject=A%20bunk%20for%20June">Write to the hut</a>
+</section>
+
+<footer>
+  <p class="name">The Atlas Hut</p>
+  <p class="credits">
+    Photographs: "blue sail, blue water" (CC BY-SA 2.0);
+    "Old hut coverted in snow in the Italian alps" (CC BY-SA 2.0);
+    "Mountainous Landscape Snow" by Louis Fleckenstein (CC0);
+    "Compass" (CC BY 2.0);
+    "See the Start of some Avalanches" (CC BY-SA 2.0).
+    Found via Openverse. Sample content — replace before launch.
+  </p>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('[data-motion]');
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach((el) => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    els.forEach((el, i) => { el.style.setProperty('--i', i); io.observe(el); });
+  }
+</script>
+</body>
+</html>

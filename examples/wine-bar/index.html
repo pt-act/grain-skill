@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale-1">
+<title>The Ledger — a wine bar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Source+Sans+3:wght@400..700&display=swap">
+<style>
+:root {
+  --ground: #d8c9a8;
+  --ground-deep: #c7b592;
+  --ink: #2b2118;
+  --ink-soft: #6d5c46;
+  --accent: #8c3b23;
+  --field: #c7b592;
+  --on-accent: #f0e7d2;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-text: 'Source Sans 3', system-ui, sans-serif;
+  --margin: clamp(16px, 4vw, 32px);
+  --measure: 42rem;
+  --section-gap: clamp(80px, 12vw, 200px);
+  --inner-gap: clamp(16px, 2vw, 24px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: clamp(1rem, 1vw + 0.875rem, 1.25rem);
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6vw + 1rem, 6.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--inner-gap);
+  font-weight: 500;
+}
+p, blockquote { max-width: var(--measure); margin: 0 0 var(--inner-gap); }
+.statement { font-size: clamp(1.4rem, 2.5vw + 0.75rem, 2.25rem); line-height: 1.25; max-width: var(--measure); }
+.caption { font-size: 0.85rem; line-height: 1.4; color: var(--ink-soft); }
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+button, .button {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 0;
+  padding: 0.9em 1.6em;
+  font-family: var(--font-text);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--on-accent); }
+.wrap { margin-inline: auto; padding-inline: var(--margin); max-width: 80rem; }
+.section { padding-block: var(--section-gap); }
+.plate { margin: 0; }
+.plate img { width: 100%; height: 100%; object-fit: cover; }
+[data-motion] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+[data-motion].in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-motion] { opacity: 1; transform: none; transition: none; }
+}
+
+/* hero: columns */
+.hero-cols { padding-top: var(--section-gap); }
+.hero-cols h1 { max-width: 100%; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--inner-gap);
+  margin-top: var(--inner-gap);
+}
+.hero-grid p { margin: 0; font-size: 1rem; line-height: 1.5; }
+.hero-grid .accent-col { color: var(--accent); font-weight: 600; }
+
+/* ledger entries */
+.entries { list-style: none; padding: 0; margin: 0; max-width: 60rem; }
+.entries li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+}
+.entries li + li { background: var(--field); padding-left: 16px; padding-right: 16px; }
+.entries li:nth-child(odd) { background: var(--ground-deep); padding-left: 16px; padding-right: 16px; }
+.entries .price { font-weight: 600; white-space: nowrap; }
+
+/* gallery hang */
+.hang { display: flex; flex-wrap: wrap; gap: var(--inner-gap); align-items: flex-start; }
+.hang figure { margin: 0; }
+.hang figure:nth-child(1) { flex: 2 1 300px; }
+.hang figure:nth-child(2) { flex: 1 1 200px; }
+.hang figure:nth-child(3) { flex: 1 1 200px; }
+.hang figure:nth-child(4) { flex: 2 1 300px; }
+.hang img { width: 100%; height: auto; }
+.hang figcaption { font-size: 0.85rem; color: var(--ink-soft); margin-top: 8px; }
+
+/* margin note */
+.margin-note { display: grid; grid-template-columns: 1fr 3fr; gap: var(--section-gap); }
+.margin-note .margin { font-size: 0.85rem; color: var(--ink-soft); }
+.margin-note .content { max-width: var(--measure); }
+
+/* window cta */
+.window-cta {
+  background: var(--field);
+  padding: var(--section-gap) var(--margin);
+  text-align: center;
+}
+.window-cta h2 { font-size: clamp(2rem, 4vw + 1rem, 4rem); }
+.window-cta p { max-width: var(--measure); margin: 0 auto var(--inner-gap); }
+
+/* footer */
+footer { background: var(--ground-deep); padding: var(--section-gap) var(--margin); }
+footer .name { font-family: var(--font-display); font-size: clamp(2rem, 5vw + 1rem, 5rem); font-weight: 500; margin: 0 0 var(--inner-gap); }
+footer .credits { font-size: 0.85rem; color: var(--ink-soft); max-width: 60rem; }
+
+@media (max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .margin-note { grid-template-columns: 1fr; }
+  .hang figure { flex: 1 1 100%; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero-cols wrap" data-motion style="--i:0">
+  <h1>The Ledger</h1>
+  <div class="hero-grid">
+    <p>A wine bar with twelve seats, a short list, and a chalkboard that changes with the market.</p>
+    <p>Open Wednesday to Sunday, from six until the last glass.</p>
+    <p class="accent-col">14 Rue des Vignes, Lyon — below the hill, above the river.</p>
+  </div>
+</header>
+
+<section class="section wrap" data-motion style="--i:1">
+  <h2>What is open tonight</h2>
+  <ul class="entries">
+    <li><span>Macon-Villages 2022 — white, crisp, cold</span><span class="price">7€ / 28€</span></li>
+    <li><span>Beaujolais 2021 — red, bright, chilled</span><span class="price">8€ / 32€</span></li>
+    <li><span>Cotes du Rhone 2020 — red, dark, room</span><span class="price">9€ / 36€</span></li>
+    <li><span>Champagne, grower, extra brut</span><span class="price">12€ / 52€</span></li>
+    <li><span>Natural petnat, skin contact</span><span class="price">10€ / 40€</span></li>
+  </ul>
+</section>
+
+<section class="section wrap" data-motion style="--i:2">
+  <h2>By the glass</h2>
+  <ul class="entries">
+    <li><span>The house pour — changes weekly</span><span class="price">5€</span></li>
+    <li><span>The sommelier's pick — ask</span><span class="price">8€</span></li>
+    <li><span>The cellar pick — something old</span><span class="price">11€</span></li>
+    <li><span>Half bottle, any open bottle</span><span class="price">half</span></li>
+  </ul>
+</section>
+
+<section class="section wrap" data-motion style="--i:3">
+  <div class="hang">
+    <figure>
+      <img src="web/sm-Modern-wine-bar-interior-with-elegant-design-and-ov-72ffa945-276a-4877-a15e-bb6ce96c1aac.jpg" alt="Wine bar interior with bottles and glasses">
+      <figcaption>The room — twelve seats, one long table, a chalkboard.</figcaption>
+    </figure>
+    <figure>
+      <img src="web/sm-Wine-Glass-ov-0249d50e-91e3-4d1d-853d-38c75e0929d9.jpg" alt="A glass of red wine">
+      <figcaption>Tonight's pour.</figcaption>
+    </figure>
+    <figure>
+      <img src="web/sm-Red-wine-ov-80f2bef4-fe3f-424e-b3b2-2cf86398a3ea.jpg" alt="Red wine being poured">
+      <figcaption>The house red, always open.</figcaption>
+    </figure>
+    <figure>
+      <img src="web/sm-Farmers-Market-South-Kingstown-RI-ov-8823de18-56d4-4402-93b1-5b4b06b3c789.jpg" alt="Market stall with produce">
+      <figcaption>Saturday's market — where the list begins.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section wrap" data-motion style="--i:4">
+  <div class="margin-note">
+    <div class="margin">
+      <p>Closed Monday and Tuesday.</p>
+      <p>Kitchen until ten.</p>
+      <p>Cash or card.</p>
+    </div>
+    <div class="content">
+      <h2>Questions</h2>
+      <p><strong>Do you take reservations?</strong><br>Only by phone, only for six or more.</p>
+      <p><strong>Can I bring a bottle?</strong><br>Yes — 15€ corkage, and we will serve it properly.</p>
+      <p><strong>Is the list fixed?</strong><br>No. The chalkboard is the list. What is written is what is open.</p>
+      <p><strong>Do you sell bottles to take away?</strong><br>Most of the list, at retail, with a small discount on six.</p>
+    </div>
+  </div>
+</section>
+
+<section class="window-cta" data-motion style="--i:5">
+  <h2>Come and sit down</h2>
+  <p>Twelve seats, one list, no reservations for fewer than six. Walk in, find a stool, point at the chalkboard.</p>
+  <a class="button" href="mailto:hello@theledger.example?subject=A%20table%20for%20tonight">Write to us</a>
+</section>
+
+<footer>
+  <p class="name">The Ledger</p>
+  <p class="credits">
+    Photographs: "Modern wine bar interior" by nenadstojkovicart (CC BY 2.0);
+    "Wine Glass" by Martin Cathrae (CC BY-SA 2.0);
+    "Red wine" by matsuyuki (CC BY-SA 2.0);
+    "Farmers Market South Kingstown RI" by ginnylgorman (CC BY 2.0);
+    "Chalkboard menu" by erinmaochu (CC BY-SA 2.0);
+    "Wine selection" by Greg Pye (CC BY 2.0).
+    Found via Openverse. Sample content — replace before launch.
+  </p>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('[data-motion]');
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach((el) => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    els.forEach((el, i) => { el.style.setProperty('--i', i); io.observe(el); });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+export const SECTIONS = {
+  'gallery-hang': {
+    role: 'gallery',
+    name: 'Gallery Hang',
+    build: 'Objects of different sizes on one ground, hung to invisible rails, each with its caption. Nothing uniform, nothing tiled.',
+    content: 'The subject\'s artefacts, products, places or works, each as one piece with its one caption.',
+    imagery: 'one photograph or drawing per piece, square or near-square, same crop',
+    notes: 'Let one piece break the rails and bleed to the edge.',
+  },
+  'ledger-entries': {
+    role: 'ledger',
+    name: 'Ledger Entries',
+    build: 'Entries in two or three columns, figures in the last column, aligned by tabular numerals. A step of tone separates entries, never a line.',
+    content: 'Anything enumerable with figures: the menu, the rooms, the lots, the fees, the list.',
+    imagery: 'none required; a small plate may head the section',
+    notes: 'Write the full list. A page that prices three of eight items is a thin page.',
+  },
+  sequence: {
+    role: 'sequence',
+    name: 'Sequence',
+    build: 'Stages in order, each with its own composition, connected by position alone. Order is read from where things sit, never from printed numbers.',
+    content: 'The process: how it is made, how it works, what happens, step by step.',
+    imagery: 'one plate per stage, same crop, the work-in-progress in view',
+    notes: 'The finished thing appears last and is given its own ground.',
+  },
+  'margin-note': {
+    role: 'margin',
+    name: 'Margin & Content',
+    build: 'A small-set margin column beside a wide content column, sharing baselines. The margin carries captions, figures and notes; the content carries the prose.',
+    content: 'An introduction, a statement, a story, a chapter of the subject.',
+    imagery: 'plates set into the content column, full width of it',
+    notes: 'On a phone the margin moves above the content, or drops if it is not essential.',
+  },
+  'annotated-plates': {
+    role: 'plates',
+    name: 'Annotated Plates',
+    build: 'Large plates — drawings, maps, photographs — with small annotations pointing from fact to place on the plate. Set in the ink, never in the accent.',
+    content: 'The explained thing: the plan, the map, the object, the recipe, the mechanism.',
+    imagery: 'one large plate per screen, annotated',
+    notes: 'Annotations are content, not decoration: each one states a real dimension, date or name.',
+  },
+  'columns-flow': {
+    role: 'columns',
+    name: 'Columns',
+    build: 'Three or four columns of running text with a heading that spans them all, plates sitting inside the flow. Separated by space, not rules.',
+    content: 'Stories, chapters, the account of the subject in prose.',
+    imagery: 'one plate per block, within the column flow',
+    notes: 'The heading spans every column; subheads break single columns.',
+  },
+  'window': {
+    role: 'window',
+    name: 'The Frame',
+    build: 'The call to action sits inside one large frame — a window, an arch, a doorway — on a field of flat colour. The frame\'s geometry comes from the subject\'s own place. Outside the frame, the ground carries only the words that must be there.',
+    content: 'One action, named for what it does, and the one fact that seals it.',
+    imagery: 'the frame built in CSS from the subject\'s architecture, or one plate inside it',
+    notes: 'The frame is flat colour and geometry, never a shadow and never a gradient.',
+  },
+};
+
+export const SECTION_ROLES = [
+  { role: 'intro', name: 'Introduction', meaning: 'The subject, in its own words, at the top of the page.' },
+  { role: 'features', name: 'Features', meaning: 'What it is: the offerings, the qualities, the things it does.' },
+  { role: 'showcase', name: 'Showcase', meaning: 'The work, the products, the rooms, the plates.' },
+  { role: 'how-it-works', name: 'How It Works', meaning: 'The process, the method, the making.' },
+  { role: 'testimonial', name: 'Voices', meaning: 'What others say — named, quoted, only if real.' },
+  { role: 'proof', name: 'Proof', meaning: 'The evidence: numbers, dates, names, places.' },
+  { role: 'stats', name: 'Figures', meaning: 'The scale: seats, years, metres, bottles, batches.' },
+  { role: 'list', name: 'List', meaning: 'The roster, the menu, the catalogue.' },
+  { role: 'pricing', name: 'Pricing', meaning: 'What it costs, and what that includes.' },
+  { role: 'faq', name: 'Questions', meaning: 'The real questions, answered fully.' },
+  { role: 'cta', name: 'Action', meaning: 'The one thing the page wants done.' },
+  { role: 'contact', name: 'Contact', meaning: 'Where it stands, when it opens, how to reach it.' },
+  { role: 'about', name: 'About', meaning: 'The story: the who, the why, the since-when.' },
+  { role: 'work', name: 'Selected Work', meaning: 'A chosen few, at scale, each with its note.' },
+  { role: 'gallery', name: 'Gallery', meaning: 'The pictures, hung.' },
+  { role: 'footer', name: 'Footer', meaning: 'The close: the name again, the credits, the fine print.' },
+];
+
+export const SECTION_BLUEPRINT_BY_ROLE = Object.fromEntries(
+  SECTION_ROLES.map((r) => [r.role, r.name.toLowerCase().replace(/[^a-z-]/g, '')]),
+);

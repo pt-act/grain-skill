@@ -1,0 +1,90 @@
+// A working shelf of sites studied for composition. These are impressions —
+// what each site is doing, noticed by looking — not measurements. Keep the
+// shelf short, current and honest; retire entries that age out.
+export const SITES = [
+  {
+    id: 'alison-brook-perfumers',
+    url: 'https://alisonbrookperfumers.com',
+    note: 'A perfumer: one object per screen, each on its own ground, captions doing the selling. The rest of the page holds still.',
+    grain: ['object-centre', 'gallery-hang'],
+    lesson: 'One thing at full scale beats a grid of everything.',
+  },
+  {
+    id: 'bellroy',
+    url: 'https://bellroy.com',
+    note: 'A goods maker: product photography at honest scale, colours that are the product\'s own, type that stays out of the way.',
+    grain: ['split', 'object-centre'],
+    lesson: 'The accent is the thing itself; the palette is found, not chosen.',
+  },
+  {
+    id: 'cpg-boston',
+    url: 'https://www.cpgboston.com',
+    note: 'A practice: huge quiet type, one photograph per chapter, sections that change ground tone rather than adding ornament.',
+    grain: ['manifesto', 'broadsheet'],
+    lesson: 'Change the field, not the furniture.',
+  },
+  {
+    id: 'emil-berlin',
+    url: 'https://emil-berlin.com',
+    note: 'A restaurant: the menu as the page, prices in plain type, no cards, no tiles, one photograph of the room.',
+    grain: ['ledger', 'market'],
+    lesson: 'A menu is a document; set it like one.',
+  },
+  {
+    id: 'field-notes-brand',
+    url: 'https://fieldnotesbrand.com',
+    note: 'A stationery maker: kraft, grids of small objects, captions that explain the making. The product line as a ledger.',
+    grain: ['ledger', 'archive-wall'],
+    lesson: 'Let the range be wide; give every entry its line.',
+  },
+  {
+    id: 'flynn-tilley',
+    url: 'https://www.flynn-tilley.com.au',
+    note: 'An inn: maps, distances, the approach by car. The location is the product, so the map is the hero.',
+    grain: ['atlas', 'blueprint'],
+    lesson: 'If the where is the story, draw it.',
+  },
+  {
+    id: 'gnardini-cucine',
+    url: 'https://www.gnardini.it',
+    note: 'Kitchens: full-bleed rooms, type small and warm, one room per screen with its dimensions in the caption.',
+    grain: ['blueprint', 'full-bleed'],
+    lesson: 'A room is a plan and a picture; show both.',
+  },
+  {
+    id: 'herbivore-botanicals',
+    url: 'https://herbivorebotanicals.com',
+    note: 'Botanicals: flat colour fields, product on ground, ingredients listed in full. Abundance without clutter.',
+    grain: ['garden', 'market'],
+    lesson: 'List everything; the list is the luxury.',
+  },
+  {
+    id: 'jongerius-lab',
+    url: 'https://www.jongeriuslab.nl',
+    note: 'A maker\'s studio: the bench, the tools, the stages of the work, photographed as found.',
+    grain: ['workshop', 'sequence'],
+    lesson: 'Process photographed honestly needs no styling.',
+  },
+  {
+    id: 'kiboko-safaris',
+    url: 'https://kiboko-safaris.com',
+    note: 'A safari lodge: dates and seasons as the spine, each camp one screen, distances in the open.',
+    grain: ['atlas', 'garden'],
+    note2: '',
+    lesson: 'A calendar of departures is a page\'s best spine.',
+  },
+  {
+    id: 'normal-coffee',
+    url: 'https://normalcoffee.com',
+    note: 'A roaster: lots as ledger entries, prices plain, one photograph of the roastery, nothing decorative.',
+    grain: ['ledger', 'field-guide'],
+    lesson: 'A lot sheet is already beautiful when set well.',
+  },
+  {
+    id: 'studio-okol',
+    url: 'https://www.studio-okol.org',
+    note: 'A design studio: index by name and year only, works as large plates, captions small in the margin.',
+    grain: ['archive-wall', 'margin'],
+    lesson: 'A portfolio is an archive, not a grid of thumbnails.',
+  },
+];

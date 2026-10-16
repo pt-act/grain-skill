@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ledger — a clean fixture</title>
+<style>
+  :root {
+    --ground: #f4f1ea; --ground-deep: #e8e3d6; --ink: #1c1a16;
+    --ink-soft: #57534a; --accent: #a33b2a; --field: #ded8c9; --on-accent: #f4f1ea;
+    --font-display: Georgia, serif; --font-text: system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink);
+         font: 17px/1.55 var(--font-text); }
+  h1 { font: 500 44px/1.05 var(--font-display); letter-spacing: -0.03em; margin: 32px 24px 16px; max-width: 900px; }
+  .statement { font-size: 26px; line-height: 1.3; max-width: 620px; margin: 0 24px 24px; }
+  .hero { margin: 0 24px 40px; }
+  .hero img { width: 100%; max-width: 900px; height: auto; }
+  .entries { max-width: 900px; margin: 0 24px; padding: 0; list-style: none; }
+  .entries li { display: flex; justify-content: space-between; gap: 16px; padding: 18px 0; }
+  .entries li + li { background: var(--field); padding-left: 16px; padding-right: 16px; }
+  .entries li:nth-child(odd) { background: var(--ground-deep); padding-left: 16px; padding-right: 16px; }
+  .caption { font-size: 14px; color: var(--ink-soft); margin: 8px 24px; }
+  [data-motion] { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  [data-motion].in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-motion] { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+<h1>The Ledger of Small Hours</h1>
+<p class="statement">A record of what the shop sells, who made it, and what it costs — set like the book it came from.</p>
+
+<img class="hero m1" src="img1.jpg" alt="The shopfront in morning light" data-motion>
+<ul class="entries">
+  <li data-motion class="m2"><span>No. 1 — The morning loaf, baked at five</span><span>4€</span></li>
+  <li data-motion class="m3"><span>No. 2 — The rye, two days to ferment</span><span>6€</span></li>
+  <li data-motion class="m4"><span>No. 3 — The butter cake, Saturdays only</span><span>3.50€</span></li>
+  <li data-motion class="m5"><span>No. 4 — The cider, pressed in October</span><span>5€</span></li>
+</ul>
+<img class="m6" src="img2.jpg" alt="Loaves cooling on the rack" data-motion>
+<img class="m7" src="img3.jpg" alt="The baker at the oven door" data-motion>
+<img class="m8" src="img4.jpg" alt="Flour, salt and the wooden bench" data-motion>
+<p class="caption">Photographs from open archives, credited below.</p>
+<footer>
+  <p class="caption">Images: open archive photographs, public domain and CC BY — credits in the project record.</p>
+</footer>
+
+<script>
+  // entrance layer: visible without script and under reduced motion
+  const els = document.querySelectorAll('[data-motion]');
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach((el) => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }, { threshold: 0.15 });
+    els.forEach((el, i) => { el.style.transitionDelay = (i * 80) + 'ms'; io.observe(el); });
+  }
+</script>
+</body>
+</html>

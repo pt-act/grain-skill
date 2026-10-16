@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale-1">
+<title>The Blueprint Studio — ceramics</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400..700&family=IBM+Plex+Mono:wght@400..600&display=swap">
+<style>
+:root {
+  --ground: #274b73;
+  --ground-deep: #1d3a5c;
+  --ink: #eef3f8;
+  --ink-soft: #b8c8d8;
+  --accent: #e2a65d;
+  --field: #31598a;
+  --on-accent: #1d3a5c;
+  --font-display: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-text: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --margin: clamp(16px, 4vw, 32px);
+  --measure: 42rem;
+  --section-gap: clamp(80px, 12vw, 200px);
+  --inner-gap: clamp(16px, 2vw, 24px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: clamp(1rem, 1vw + 0.875rem, 1.25rem);
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6vw + 1rem, 6.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--inner-gap);
+  font-weight: 600;
+}
+p, blockquote { max-width: var(--measure); margin: 0 0 var(--inner-gap); }
+.statement { font-size: clamp(1.4rem, 2.5vw + 0.75rem, 2.25rem); line-height: 1.25; max-width: var(--measure); }
+.caption { font-size: 0.85rem; line-height: 1.4; color: var(--ink-soft); }
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+button, .button {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 0;
+  padding: 0.9em 1.6em;
+  font-family: var(--font-text);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--on-accent); }
+.wrap { margin-inline: auto; padding-inline: var(--margin); max-width: 80rem; }
+.section { padding-block: var(--section-gap); }
+.plate { margin: 0; }
+.plate img { width: 100%; height: 100%; object-fit: cover; }
+[data-motion] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+[data-motion].in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-motion] { opacity: 1; transform: none; transition: none; }
+}
+
+/* window hero */
+.hero-window {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--section-gap) var(--margin);
+  background: var(--ground-deep);
+}
+.hero-window .frame {
+  position: absolute;
+  inset: var(--margin);
+  border: 4px solid var(--ink);
+  pointer-events: none;
+}
+.hero-window .content { position: relative; z-index: 1; }
+.hero-window h1 { max-width: 100%; }
+
+/* annotated plates */
+.plates { display: grid; grid-template-columns: 1fr 1fr; gap: var(--section-gap); align-items: start; }
+.plates .plate { position: relative; }
+.plates .plate img { width: 100%; height: auto; }
+.plates .annotation {
+  position: absolute;
+  font-size: 0.85rem;
+  color: var(--ink);
+  background: var(--ground);
+  padding: 4px 8px;
+  border: 1px solid var(--ink);
+  font-family: var(--font-mono);
+}
+.plates .annotation::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  width: 20px;
+  height: 1px;
+  background: var(--ink);
+}
+
+/* sequence */
+.sequence { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--inner-gap); }
+.sequence .stage { background: var(--field); padding: var(--inner-gap); }
+.sequence .stage img { width: 100%; height: auto; margin-bottom: var(--inner-gap); }
+.sequence .stage h3 { font-size: 1.25rem; margin: 0 0 8px; }
+.sequence .stage p { font-size: 0.9rem; margin: 0; color: var(--ink-soft); }
+
+/* ledger entries */
+.entries { list-style: none; padding: 0; margin: 0; max-width: 60rem; }
+.entries li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+}
+.entries li + li { background: var(--field); padding-left: 16px; padding-right: 16px; }
+.entries li:nth-child(odd) { background: var(--ground-deep); padding-left: 16px; padding-right: 16px; }
+.entries .price { font-weight: 600; white-space: nowrap; }
+
+/* margin note */
+.margin-note { display: grid; grid-template-columns: 1fr 3fr; gap: var(--section-gap); }
+.margin-note .margin { font-size: 0.85rem; color: var(--ink-soft); }
+.margin-note .content { max-width: var(--measure); }
+
+/* window cta */
+.window-cta {
+  background: var(--field);
+  padding: var(--section-gap) var(--margin);
+  text-align: center;
+}
+.window-cta h2 { font-size: clamp(2rem, 4vw + 1rem, 4rem); }
+.window-cta p { max-width: var(--measure); margin: 0 auto var(--inner-gap); }
+
+/* footer */
+footer { background: var(--ground-deep); padding: var(--section-gap) var(--margin); }
+footer .name { font-family: var(--font-display); font-size: clamp(2rem, 5vw + 1rem, 5rem); font-weight: 600; margin: 0 0 var(--inner-gap); }
+footer .credits { font-size: 0.85rem; color: var(--ink-soft); max-width: 60rem; }
+
+@media (max-width: 768px) {
+  .plates { grid-template-columns: 1fr; }
+  .sequence { grid-template-columns: 1fr; }
+  .margin-note { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero-window" data-motion style="--i:0">
+  <div class="frame"></div>
+  <div class="content">
+    <h1>The Blueprint Studio</h1>
+    <p class="statement">A ceramics studio firing wood kilns in a riverside warehouse — every piece drawn before it is made.</p>
+  </div>
+</header>
+
+<section class="section wrap" data-motion style="--i:1">
+  <h2>The making</h2>
+  <div class="sequence">
+    <div class="stage">
+      <img src="web/sm-Kid-s-Pottery-ov-23efc102-68e9-4bc5-a5ef-8aa275622d40.jpg" alt="Hands working clay">
+      <h3>Throw</h3>
+      <p>Centred, opened, pulled. The wall thickness is measured with calipers.</p>
+    </div>
+    <div class="stage">
+      <img src="web/sm-DSC01452-Making-a-Spoon-ov-0aed6214-80ef-40ab-a1fc-81c1d83f32d9.jpg" alt="Carving a spoon">
+      <h3>Carve</h3>
+      <p>Handles, spouts, lids. Each piece is trimmed and signed on the foot.</p>
+    </div>
+    <div class="stage">
+      <img src="web/sm-Bushmen-Pottery-Deadvlei-ov-7715d686-581c-4695-bc23-d4ffad29f122.jpg" alt="Finished pottery vessels">
+      <h3>Fire</h3>
+      <p>Wood kiln, 48 hours, 1280°C. The flame decides the glaze.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" data-motion style="--i:2">
+  <h2>What is available</h2>
+  <ul class="entries">
+    <li><span>Espresso cup — wheel thrown, wood fired</span><span class="price">28€</span></li>
+    <li><span>Dinner plate — 24cm, food safe glaze</span><span class="price">34€</span></li>
+    <li><span>Serving bowl — 30cm, one of a kind</span><span class="price">65€</span></li>
+    <li><span>Commission — tell us what you need</span><span class="price">from 40€</span></li>
+  </ul>
+</section>
+
+<section class="section wrap" data-motion style="--i:3">
+  <div class="margin-note">
+    <div class="margin">
+      <p>Studio visits: Saturdays, 10–12.</p>
+      <p>Workshops: first Sunday of the month.</p>
+      <p>Commissions: 4–6 weeks.</p>
+    </div>
+    <div class="content">
+      <h2>Questions</h2>
+      <p><strong>Can I watch a firing?</strong><br>Yes — the kiln is loaded on Friday evening. Bring a coat.</p>
+      <p><strong>Do you ship?</strong><br>Yes, within the EU, in straw and cardboard.</p>
+      <p><strong>What if my piece cracks?</strong><br>It happens. We will replace it or refund you, your choice.</p>
+      <p><strong>Can I use the studio?</strong><br>Members get 24-hour access. The kiln is by arrangement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" data-motion style="--i:4">
+  <div class="plates">
+    <div class="plate">
+      <img src="web/sm-old-tools-ov-104f47f5-f1ca-48fb-83d9-449e5c7d597f.jpg" alt="Old workshop tools">
+      <span class="annotation" style="top: 20%; left: 10%;">Calipers — wall 4mm</span>
+    </div>
+    <div class="plate">
+      <img src="web/sm-Bench-plane-ds560-ov-54b0234c-3d8f-4175-8b96-43389acfe044.jpg" alt="A bench plane">
+      <span class="annotation" style="top: 30%; left: 15%;">Plane — for the bench, not the pots</span>
+    </div>
+  </div>
+</section>
+
+<section class="window-cta" data-motion style="--i:5">
+  <h2>Come and throw</h2>
+  <p>One day, one wheel, one bag of clay. You will leave with a cup and a callus.</p>
+  <a class="button" href="mailto:workshop@blueprintstudio.example?subject=A%20day%20at%20the%20wheel">Book a session</a>
+</section>
+
+<footer>
+  <p class="name">The Blueprint Studio</p>
+  <p class="credits">
+    Photographs: "Kid's Pottery" (CC BY 2.0);
+    "Making a Spoon" (CC BY-SA 2.0);
+    "Bushmen Pottery Deadvlei" (CC BY 2.0);
+    "old tools" (CC BY 2.0);
+    "Bench plane" (CC BY-SA 2.0);
+    "Moche Ritual Vessels" (CC0).
+    Found via Openverse. Sample content — replace before launch.
+  </p>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('[data-motion]');
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach((el) => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    els.forEach((el, i) => { el.style.setProperty('--i', i); io.observe(el); });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+export const TYPE_SYSTEMS = [
+  {
+    id: 'editorial-serif',
+    name: 'Editorial Serif',
+    note: 'A high-contrast book serif for display with a quiet humanist sans for prose. The magazine\'s default.',
+    display: { family: 'Fraunces', role: 'display', weight: '300–600', tracking: '-0.03em', loading: 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&display=swap' },
+    text: { family: 'Source Sans 3', role: 'text', weight: '400–600', loading: 'https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400..700&display=swap' },
+    mono: { family: 'ui-monospace, SFMono-Regular, Menlo, monospace', role: 'mono (code only)' },
+  },
+  {
+    id: 'swiss-grotesk',
+    name: 'Swiss Grotesk',
+    note: 'One grotesk family doing every job, size doing the hierarchy. Geneva, 1957.',
+    display: { family: 'Archivo', role: 'display', weight: '500–800', tracking: '-0.02em', loading: 'https://fonts.googleapis.com/css2?family=Archivo:wght@500..800&display=swap' },
+    text: { family: 'Archivo', role: 'text', weight: '400–600', loading: '' },
+    mono: { family: 'ui-monospace, SFMono-Regular, Menlo, monospace', role: 'mono (code only)' },
+  },
+  {
+    id: 'transitional-serif',
+    name: 'Transitional Serif',
+    note: 'A newspaper serif for display, a grotesk for prose and figures. Front-page voice.',
+    display: { family: 'Playfair Display', role: 'display', weight: '500–800', tracking: '-0.01em', loading: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500..900&display=swap' },
+    text: { family: 'Inter', role: 'text', weight: '400–600', loading: 'https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap' },
+    mono: { family: 'ui-monospace, SFMono-Regular, Menlo, monospace', role: 'mono (code only)' },
+  },
+  {
+    id: 'old-style-serif',
+    name: 'Old Style',
+    note: 'A warm Garamond-like serif throughout, size alone separating roles. Monastery, ledger, letterpress.',
+    display: { family: 'EB Garamond', role: 'display', weight: '400–700', tracking: '0em', loading: 'https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap' },
+    text: { family: 'EB Garamond', role: 'text', weight: '400–600', loading: '' },
+    mono: { family: 'ui-monospace, SFMono-Regular, Menlo, monospace', role: 'mono (code only)' },
+  },
+  {
+    id: 'brutalist-concrete',
+    name: 'Brutalist Concrete',
+    note: 'A heavy condensed grotesk for display, system sans for prose. Loud, flat, no curves.',
+    display: { family: 'Archivo Black', role: 'display', weight: '400', tracking: '-0.01em', loading: 'https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap' },
+    text: { family: 'system-ui, -apple-system, Segoe UI, sans-serif', role: 'text', weight: '400–600', loading: '' },
+    mono: { family: 'ui-monospace, SFMono-Regular, Menlo, monospace', role: 'mono (code only)' },
+  },
+  {
+    id: 'didone',
+    name: 'Didone',
+    note: 'A fashion Didone for display, a light grotesk for prose. Sharp serifs, thin means important.',
+    display: { family: 'Bodoni Moda', role: 'display', weight: '400–800', tracking: '-0.015em', loading: 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..60,400..900&display=swap' },
+    text: { family: 'Inter', role: 'text', weight: '300–500', loading: 'https://fonts.googleapis.com/css2?family=Inter:wght@300..600&display=swap' },
+    mono: { family: 'ui-monospace, SFMono-Regular, Menlo, monospace', role: 'mono (code only)' },
+  },
+  {
+    id: 'humanist-sans',
+    name: 'Humanist Sans',
+    note: 'A warm humanist sans for display and prose. Apothecary, clinic, garden.',
+    display: { family: 'Source Sans 3', role: 'display', weight: '600–700', tracking: '-0.01em', loading: 'https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400..700&display=swap' },
+    text: { family: 'Source Sans 3', role: 'text', weight: '400–600', loading: '' },
+    mono: { family: 'ui-monospace, SFMono-Regular, Menlo, monospace', role: 'mono (code only)' },
+  },
+  {
+    id: 'technical-grotesk',
+    name: 'Technical Grotesk',
+    note: 'A precise grotesk with tabular figures for everything. Drawing office, instrument panel.',
+    display: { family: 'IBM Plex Sans', role: 'display', weight: '500–700', tracking: '-0.02em', loading: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400..700&display=swap' },
+    text: { family: 'IBM Plex Sans', role: 'text', weight: '400–600', loading: '' },
+    mono: { family: 'IBM Plex Mono', role: 'mono (figures & code)', loading: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400..600&display=swap' },
+  },
+];
+
+export const TYPE_SYSTEM_BY_ID = Object.fromEntries(TYPE_SYSTEMS.map((t) => [t.id, t]));
