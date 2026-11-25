@@ -40,7 +40,10 @@ echo "   draw, tokens, report, doctor, self-lint: ok"
 
 if [ "${1:-}" != "--skip-browser" ]; then
   echo "== inspector on the clean page =="
-  node "$OLDPWD/$S/inspect.mjs" "$OLDPWD/$FIX/clean.html" >"$WORK/inspect.txt" 2>&1 || fail "inspect failed on clean.html"
+  if ! node "$OLDPWD/$S/inspect.mjs" "$OLDPWD/$FIX/clean.html" >"$WORK/inspect.txt" 2>&1; then
+    cat "$WORK/inspect.txt"
+    fail "inspect failed on clean.html"
+  fi
   grep -q "inspect: PASS" "$WORK/inspect.txt" || fail "inspect did not PASS on clean.html"
   [ -f ".grain/inspect/phone.png" ] || fail "no phone screenshot"
   [ -f ".grain/inspect/desktop.png" ] || fail "no desktop screenshot"

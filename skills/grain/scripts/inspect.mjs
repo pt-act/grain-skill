@@ -95,9 +95,11 @@ async function main() {
 
   const port = 9222 + Math.floor(Math.random() * 5000);
   const udd = join(STATE_DIR, `profile-${process.pid}`);
+  const ciFlags = process.env.CI ? ['--no-sandbox', '--disable-dev-shm-usage'] : [];
   const proc = spawn(browserPath, [
     '--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check',
     ...(process.getuid && process.getuid() === 0 ? ['--no-sandbox'] : []),
+    ...ciFlags,
     `--remote-debugging-port=${port}`, `--user-data-dir=${udd}`, '--about:blank',
   ], { stdio: ['ignore', 'pipe', 'pipe'] });
 
