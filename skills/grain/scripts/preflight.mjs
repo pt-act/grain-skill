@@ -23,7 +23,7 @@ const nodeOk = process.versions.node.split('.').map(Number)[0] >= 22;
 results.push(row('Node 22+', nodeOk, `Node ${process.versions.node}${nodeOk ? '' : ' — lint works, the inspector does not'}`));
 
 const browser = findBrowser();
-results.push(row('Chrome/Edge/Chromium', Boolean(browser), browser ? `${browser.path} (${browser.source})` : 'not found — the inspector cannot run; set GRAIN_BROWSER'));
+results.push(row('Chrome/Edge/Chromium/Brave', Boolean(browser), browser ? `${browser.path} (${browser.source})` : 'not found — the inspector cannot run; set GRAIN_BROWSER'));
 
 const ov = await probeNetwork(SOURCES.openverse);
 results.push(row('Openverse', ov.reachable, ov.reachable ? `reachable (${ov.ms}ms)` : 'unreachable — pictures must be drawn'));

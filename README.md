@@ -8,10 +8,12 @@ centred headline over three lines, a label above it, a row of icon cards, a soft
 gradient, a few thin rules and a monospace caption. **Nothing in it is wrong and
 nothing in it was decided.** Grain replaces those defaults with decisions.
 
+[![tests](https://github.com/pt-act/grain-skill/actions/workflows/test.yml/badge.svg)](https://github.com/pt-act/grain-skill/actions/workflows/test.yml)
+
 ## Install
 
 ```bash
-npx skills add https://github.com/<your-fork>/grain-skill
+npx skills add https://github.com/pt-act/grain-skill
 ```
 
 Or symlink from a clone so `git pull` updates in place:
@@ -66,7 +68,7 @@ to check one.
 10. **Report** — direction, idea, scores, credits, sample content to confirm.
 
 The scripts need Node 22+ and install nothing. `inspect.mjs` drives an installed
-Chrome, Edge or Chromium over the DevTools protocol with no dependencies.
+Chrome, Edge, Chromium or Brave over the DevTools protocol with no dependencies.
 `assets.mjs` searches Openverse and Wikimedia Commons with no API key; it keeps
 only public-domain, CC0, CC BY and CC BY-SA files by default and records their
 credits for the footer.

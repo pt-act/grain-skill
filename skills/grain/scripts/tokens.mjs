@@ -10,6 +10,7 @@
 // both, labelled.
 
 import { loadState } from './state.mjs';
+import { LIBRARY_VERSION } from '../library/version.js';
 
 const args = process.argv.slice(2);
 const wantCss = args.includes('--css') || !args.includes('--html');
@@ -26,7 +27,7 @@ const dir = d.direction;
 const hex = (c) => (c ? c : '/* map the brand colour here */');
 
 if (wantCss) {
-  console.log('/* tokens — from the dealt sheet: ' + dir.name + ' [' + dir.id + '] */');
+  console.log('/* tokens — grain ' + (state.libraryVersion || LIBRARY_VERSION) + ' — from the dealt sheet: ' + dir.name + ' [' + dir.id + '] */');
   console.log(':root {');
   if (d.palette) {
     const p = d.palette;

@@ -8,7 +8,7 @@
 //                  [--keep palette,type] [--options 3] [--seed 1]
 //   node draw.mjs ... --direction <chosen id>      (full sheet)
 //   node draw.mjs --show                          (reprint last sheet)
-//   node draw.mjs ... --redraw hero|type|palette|photos|section:<role>=<alt>
+//   node draw.mjs ... --redraw hero|type|palette|section:<role>=<alt>
 //   node draw.mjs --photos <direction id>
 //   node draw.mjs --site <site id>
 
@@ -24,6 +24,7 @@ import { MOTIONS, MOTION_BY_ID } from '../library/motions.js';
 import { SECTORS, SECTOR_BY_ID } from '../library/sectors.js';
 import { SITES } from '../library/sites.js';
 import { IMAGE_QUERIES_BY_DIRECTION } from '../library/image-queries.js';
+import { LIBRARY_VERSION } from '../library/version.js';
 
 const SKILL_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -82,7 +83,7 @@ function parseArgs(argv) {
 
 const args = parseArgs(process.argv.slice(2));
 
-function usage() {
+function usage(code = 0) {
   console.log(`draw.mjs — deal directions and print a direction sheet.
 
   --list sectors              list sectors
@@ -94,17 +95,18 @@ function usage() {
       [--options 3]           deal N options (default 3), then stop
       [--seed <n>]            reproducible deal
       --direction <id>        print the full sheet for one dealt direction
-      --redraw <slot>         deal a new value for hero|type|palette|photos
+      --redraw <slot>         deal a new value for hero|type|palette
       --redraw section:<role>=<alt>  swap a section blueprint
       --alternatives <role>    list blueprint alternatives for a role
       --show                  reprint the last sheet in this folder
       --photos <direction id> reference photograph queries for a direction
       --site <site id>        show one studied site
 `);
-  process.exit(args._[0] === '--help' || args._[0] === '-h' ? 0 : 1);
+  process.exit(code);
 }
 
-if (args._.includes('--help') || args._.includes('-h') || Object.keys(args).length === 0 || args._[0] === 'help') usage();
+if (args.help || args.h || args._[0] === 'help') usage(0);
+if (args._.length === 0 && Object.keys(args).length === 1) usage(1);
 
 if (args['list'] === 'sectors' || args.list === 'sectors') {
   for (const s of SECTORS) console.log(`${s.id.padEnd(24)} ${s.name} — ${s.examples}`);
@@ -132,6 +134,9 @@ if (args.show) {
   if (!state?.direction) {
     console.log('No sheet yet. Deal one first.');
     process.exit(1);
+  }
+  if (state.libraryVersion && state.libraryVersion !== LIBRARY_VERSION) {
+    console.log(`Note: this sheet was dealt by library ${state.libraryVersion}; the library is now ${LIBRARY_VERSION}. Re-deal if the difference matters.`);
   }
   printSheet(state.direction, { header: 'Last sheet' });
   process.exit(0);
@@ -176,6 +181,7 @@ if (args.redraw) {
   if (!reason) console.log('Note: no --reason given. A redraw without a stated reason reads as comfort-seeking; the report will ask for one.');
   updateState((s) => {
     s.direction = sheet;
+    s.libraryVersion = LIBRARY_VERSION;
     s.redraws.push({ at: new Date().toISOString(), slot, reason });
   });
   printSheet(sheet, { header: `Direction sheet — ${sheet.direction.name} (redrawn)` });
@@ -199,7 +205,8 @@ if (args.alternatives) {
   const name = SECTION_BLUEPRINT_NAME(role);
   console.log(`Blueprint alternatives for "${role}":`);
   for (const [key, bp] of Object.entries(SECTIONS)) {
-    const fits = bp.role === role || bp.role === 'gallery' || role === 'showcase' || role === 'gallery' || role === 'work';
+    const fits = bp.role === role
+      || (['showcase', 'work', 'gallery'].includes(role) && bp.role === 'gallery');
     if (fits) console.log(`  ${key.padEnd(20)} ${bp.name} — ${bp.build}`);
   }
   console.log(`\nDefault for ${role}: ${name}`);
@@ -335,6 +342,7 @@ function buildWarnings(d, hero, palette, t) {
 function saveAndPrint(sheet, all) {
   updateState((s) => {
     s.direction = sheet;
+    s.libraryVersion = LIBRARY_VERSION;
     s.dealt = all.map((x) => ({ id: x.direction.id, name: x.direction.name }));
   });
   printSheet(sheet, { header: `Direction sheet — ${sheet.direction.name}` });
@@ -413,7 +421,7 @@ function printSheet(sheet, { header }) {
   console.log('');
   console.log('  Next: read the sheet against the brief, write the idea sentence,');
   console.log('  then build still. Redraw a slot only for a stated reason:');
-  console.log('    --redraw hero|type|palette|photos   ·   --redraw section:<role>=<alt>');
+  console.log('    --redraw hero|type|palette   ·   --redraw section:<role>=<alt>');
   console.log('');
 }
 

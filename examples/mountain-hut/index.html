@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Atlas Hut — a mountain refuge</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500..800&display=swap">
 <style>
@@ -100,7 +100,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
   color: var(--ink);
   background: var(--ground);
   padding: 4px 8px;
-  border: 1px solid var(--ink);
+  border: 2px solid var(--ink);
 }
 .plates .annotation::before {
   content: '';
@@ -108,7 +108,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
   left: -20px;
   top: 50%;
   width: 20px;
-  height: 1px;
+  height: 2px;
   background: var(--ink);
 }
 
@@ -162,11 +162,11 @@ footer .credits { font-size: 0.85rem; color: var(--ink-soft); max-width: 60rem; 
 <section class="section wrap" data-motion style="--i:1">
   <h2>The way in</h2>
   <div class="plates">
-    <div class="plate">
+    <div class="plate" data-motion>
       <img src="web/sm-blue-sail-blue-water-ov-3b2408d3-c5c5-42f9-8476-59961c576547.jpg" alt="A sailboat on the lake">
       <span class="annotation" style="top: 20%; left: 10%;">Ferry — 40 min, 3 daily</span>
     </div>
-    <div class="plate">
+    <div class="plate" data-motion>
       <img src="web/sm-Old-hut-coverted-in-snow-in-the-Italian-alps-ov-46981402-2b47-482b-a4a0-24bc55ef7f0c.jpg" alt="A mountain hut in snow">
       <span class="annotation" style="top: 30%; left: 15%;">Trail — 2 hours, marked</span>
     </div>
@@ -202,15 +202,15 @@ footer .credits { font-size: 0.85rem; color: var(--ink-soft); max-width: 60rem; 
 
 <section class="section wrap" data-motion style="--i:4">
   <div class="hang" style="display:flex;flex-wrap:wrap;gap:var(--inner-gap)">
-    <figure style="flex:2 1 300px;margin:0">
+    <figure data-motion style="flex:2 1 300px;margin:0">
       <img src="web/sm-Mountainous-Landscape-Snow-Louis-Fleckenstein-ov-8b7cbd5b-8ff9-417d-8f75-4af7efabc5fd.jpg" alt="Mountainous landscape in snow">
       <figcaption class="caption">The view from the door, on a clear morning.</figcaption>
     </figure>
-    <figure style="flex:1 1 200px;margin:0">
+    <figure data-motion style="flex:1 1 200px;margin:0">
       <img src="web/sm-Compass-ov-3f2a833e-1797-429d-9142-13c96063840c.jpg" alt="A compass">
       <figcaption class="caption">The compass on the wall, pointing at the door.</figcaption>
     </figure>
-    <figure style="flex:1 1 200px;margin:0">
+    <figure data-motion style="flex:1 1 200px;margin:0">
       <img src="web/sm-See-the-Start-of-some-Avalanches-ov-68bcd730-14c2-469d-a3be-6998ff62959f.jpg" alt="Avalanche starting on a slope">
       <figcaption class="caption">The slope we watch, and the reason for the season.</figcaption>
     </figure>

@@ -9,11 +9,13 @@ export function findBrowser() {
   const candidates = [
     '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium',
     '/usr/bin/chromium-browser', '/usr/bin/microsoft-edge', '/usr/bin/microsoft-edge-stable',
+    '/usr/bin/brave-browser', '/usr/bin/brave',
     '/opt/google/chrome/chrome', '/opt/microsoft/msedge/msedge',
     '/snap/bin/chromium',
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
     '/Applications/Chromium.app/Contents/MacOS/Chromium',
+    '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser',
     'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
     'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
   ];

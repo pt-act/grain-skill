@@ -28,8 +28,13 @@ node ../../skills/grain/scripts/lint.mjs .
 node ../../skills/grain/scripts/inspect.mjs index.html
 ```
 
-The inspector needs Chrome, Edge, or Chromium. Screenshots land in
+The inspector needs Chrome, Edge, Chromium, or Brave. Screenshots land in
 `.grain/inspect/`.
+
+The window and columns heroes carry no photograph by design, so the
+`hero-media` warning is expected on those pages and is defended rather than
+fixed. Every other warning is either fixed or explained in the page's own
+comments.
 
 ## Replacing the content
 

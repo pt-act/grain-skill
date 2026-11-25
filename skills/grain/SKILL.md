@@ -32,7 +32,7 @@ for restraint.
 
 In the commands below `<skill>` is this skill's folder. Run them from the project's root, so
 working files land in `.grain/` there. The scripts need Node 22+ and install nothing.
-`inspect.mjs` needs an installed Chrome, Edge or Chromium; `assets.mjs` needs network
+`inspect.mjs` needs an installed Chrome, Edge, Chromium or Brave; `assets.mjs` needs network
 access and uses no API keys. Every script that produces durable output records it in
 `.grain/build-state.json` — the report and the doctor read it later.
 
@@ -131,7 +131,7 @@ The command prints a **direction sheet**. It is the art direction for this build
 
 - **Adopt it.** Do not blend it with the layout you would have made anyway. If it feels
   unfamiliar, good: the familiar layout is the one this skill exists to prevent.
-- Redraw one slot (`--redraw hero | type | palette | photos | section:<role>=<alt>`) only
+- Redraw one slot (`--redraw hero | type | palette | section:<role>=<alt>`) only
   for a reason you can state: it contradicts a stated brand constraint, or needs an asset
   that does not exist. Never redraw to get something more comfortable. Record every redraw
   in your report.

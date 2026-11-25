@@ -2,7 +2,7 @@ name: grain self-test
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   pull_request:
 
 jobs:
@@ -15,9 +15,15 @@ jobs:
         with:
           node-version: 22
 
-      - uses: browser-actions/setup-chrome@v4
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
         with:
           chrome-version: stable
 
+      - name: Lint the examples
+        run: node skills/grain/scripts/lint.mjs examples
+
       - name: Run the grain self-test
+        env:
+          GRAIN_BROWSER: ${{ steps.chrome.outputs.chrome-path }}
         run: bash skills/grain/tests/run.sh

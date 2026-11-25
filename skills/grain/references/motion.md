@@ -16,7 +16,7 @@ That is the whole budget. A page with twenty simultaneous effects is a page with
 - **Transform and opacity only.** Nothing else animates: no colour shifts, no layout thrash, no width/height. The exception is a scroll-linked drift on one plate, which moves transform only.
 - **Once.** Entrances fire once, as the section crosses 85% of the viewport, and never reset. Content that stays hidden if the script fails is banned — everything must be visible without script.
 - **60–90ms stagger** between parts of a section: heading, then text, then picture. 16–24px of travel, opacity to 1. Not one fade for the whole block.
-- **`prefers-reduced-motion`**: every move's fallback keeps the content and drops the travel. The inspector emulates reduced motion and fails a page whose content disappears.
+- **`prefers-reduced-motion`**: every move's fallback keeps the content and drops the travel. The inspector emulates reduced motion and fails a page whose `[data-motion]` content stays hidden.
 - **Feedback**: press, hover and focus on every button, link, card and the live thing. A control with no feedback is a dead end.
 
 ## §3 The recipes

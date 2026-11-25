@@ -2,3 +2,5 @@
 node_modules/
 *.corrupt-*
 .DS_Store
+
+.metis/

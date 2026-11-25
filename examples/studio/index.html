@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Blueprint Studio — ceramics</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400..700&family=IBM+Plex+Mono:wght@400..600&display=swap">
 <style>
@@ -101,8 +101,8 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
   color: var(--ink);
   background: var(--ground);
   padding: 4px 8px;
-  border: 1px solid var(--ink);
-  font-family: var(--font-mono);
+  border: 2px solid var(--ink);
+  font-family: var(--font-text);
 }
 .plates .annotation::before {
   content: '';
@@ -110,7 +110,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
   left: -20px;
   top: 50%;
   width: 20px;
-  height: 1px;
+  height: 2px;
   background: var(--ink);
 }
 
@@ -119,7 +119,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
 .sequence .stage { background: var(--field); padding: var(--inner-gap); }
 .sequence .stage img { width: 100%; height: auto; margin-bottom: var(--inner-gap); }
 .sequence .stage h3 { font-size: 1.25rem; margin: 0 0 8px; }
-.sequence .stage p { font-size: 0.9rem; margin: 0; color: var(--ink-soft); }
+.sequence .stage p { font-size: 1rem; margin: 0; color: var(--ink-soft); }
 
 /* ledger entries */
 .entries { list-style: none; padding: 0; margin: 0; max-width: 60rem; }
@@ -172,17 +172,17 @@ footer .credits { font-size: 0.85rem; color: var(--ink-soft); max-width: 60rem; 
 <section class="section wrap" data-motion style="--i:1">
   <h2>The making</h2>
   <div class="sequence">
-    <div class="stage">
+    <div class="stage" data-motion>
       <img src="web/sm-Kid-s-Pottery-ov-23efc102-68e9-4bc5-a5ef-8aa275622d40.jpg" alt="Hands working clay">
       <h3>Throw</h3>
       <p>Centred, opened, pulled. The wall thickness is measured with calipers.</p>
     </div>
-    <div class="stage">
+    <div class="stage" data-motion>
       <img src="web/sm-DSC01452-Making-a-Spoon-ov-0aed6214-80ef-40ab-a1fc-81c1d83f32d9.jpg" alt="Carving a spoon">
       <h3>Carve</h3>
       <p>Handles, spouts, lids. Each piece is trimmed and signed on the foot.</p>
     </div>
-    <div class="stage">
+    <div class="stage" data-motion>
       <img src="web/sm-Bushmen-Pottery-Deadvlei-ov-7715d686-581c-4695-bc23-d4ffad29f122.jpg" alt="Finished pottery vessels">
       <h3>Fire</h3>
       <p>Wood kiln, 48 hours, 1280°C. The flame decides the glaze.</p>
@@ -219,11 +219,11 @@ footer .credits { font-size: 0.85rem; color: var(--ink-soft); max-width: 60rem; 
 
 <section class="section wrap" data-motion style="--i:4">
   <div class="plates">
-    <div class="plate">
+    <div class="plate" data-motion>
       <img src="web/sm-old-tools-ov-104f47f5-f1ca-48fb-83d9-449e5c7d597f.jpg" alt="Old workshop tools">
       <span class="annotation" style="top: 20%; left: 10%;">Calipers — wall 4mm</span>
     </div>
-    <div class="plate">
+    <div class="plate" data-motion>
       <img src="web/sm-Bench-plane-ds560-ov-54b0234c-3d8f-4175-8b96-43389acfe044.jpg" alt="A bench plane">
       <span class="annotation" style="top: 30%; left: 15%;">Plane — for the bench, not the pots</span>
     </div>
@@ -243,8 +243,7 @@ footer .credits { font-size: 0.85rem; color: var(--ink-soft); max-width: 60rem; 
     "Making a Spoon" (CC BY-SA 2.0);
     "Bushmen Pottery Deadvlei" (CC BY 2.0);
     "old tools" (CC BY 2.0);
-    "Bench plane" (CC BY-SA 2.0);
-    "Moche Ritual Vessels" (CC0).
+    "Bench plane" (CC BY-SA 2.0).
     Found via Openverse. Sample content — replace before launch.
   </p>
 </footer>

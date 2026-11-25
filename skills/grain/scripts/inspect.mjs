@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 // inspect.mjs — measure the page in a real browser and fail it on the house
-// rules. Drives Chrome, Edge or Chromium over the DevTools protocol with no
+// rules. Drives Chrome, Edge, Chromium or Brave over the DevTools protocol with no
 // dependencies (Node 22's built-in WebSocket).
 //
-//   node inspect.mjs <url or path/to/index.html> [--allow <rule>] [--shots]
+//   node inspect.mjs <url or path/to/index.html> [--allow <rule>]
 //
 // Prints PASS/FAIL per rule and writes screenshots to .grain/inspect/.
-// Needs Node 22+ and an installed Chrome, Edge or Chromium. Installs nothing.
+// Needs Node 22+ and an installed Chrome, Edge, Chromium or Brave. Installs nothing.
 
 import { spawn } from 'node:child_process';
 import { writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
@@ -51,6 +51,22 @@ class CDP {
   }
 }
 
+// Wait for the document to finish loading. Polling readyState avoids the
+// stale Page.loadEventFired that can fire for about:blank before the real
+// navigation and leave the first viewport's counters empty.
+async function waitForReady(cdp, sessionId, timeoutMs = 15000) {
+  const start = Date.now();
+  while (Date.now() - start < timeoutMs) {
+    try {
+      const { result } = await cdp.send('Runtime.evaluate', {
+        expression: 'document.readyState', returnByValue: true,
+      }, sessionId);
+      if (result?.value === 'complete') return;
+    } catch { /* the page may be mid-navigation */ }
+    await new Promise((r) => setTimeout(r, 100));
+  }
+}
+
 async function main() {
   const argv = process.argv.slice(2);
   const target = argv.find((a) => !a.startsWith('--'));
@@ -69,9 +85,9 @@ async function main() {
   const browser = findBrowser();
   if (!browser?.path) {
     updateState((s) => {
-      s.gates.push({ at: new Date().toISOString(), skipped: true, reason: 'no Chrome, Edge or Chromium found on this machine' });
+      s.gates.push({ at: new Date().toISOString(), skipped: true, reason: 'no Chrome, Edge, Chromium or Brave found on this machine' });
     });
-    console.log('No Chrome, Edge or Chromium found on this machine.');
+    console.log('No Chrome, Edge, Chromium or Brave found on this machine.');
     console.log('Install one, or set GRAIN_BROWSER to its path.');
     process.exit(2);
   }
@@ -81,6 +97,7 @@ async function main() {
   const udd = join(STATE_DIR, `profile-${process.pid}`);
   const proc = spawn(browserPath, [
     '--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check',
+    ...(process.getuid && process.getuid() === 0 ? ['--no-sandbox'] : []),
     `--remote-debugging-port=${port}`, `--user-data-dir=${udd}`, '--about:blank',
   ], { stdio: ['ignore', 'pipe', 'pipe'] });
 
@@ -116,12 +133,14 @@ async function main() {
   await cdp.send('Page.addScriptToEvaluateOnNewDocument', {
     source: `
       window.__grainMoves = new Set();
-      window.__grainSeen = new Set();
+      window.__grainSeq = 0;
+      const keyOf = (el) => {
+        if (!el.__grainKey) el.__grainKey = 'g' + (++window.__grainSeq);
+        return el.__grainKey;
+      };
       for (const type of ['animationstart', 'transitionstart']) {
         document.addEventListener(type, (e) => {
-          const el = e.target;
-          const key = el.tagName.toLowerCase() + '.' + (el.className && el.className.baseVal === undefined ? String(el.className).split(' ').slice(0,2).join('.') : '');
-          window.__grainMoves.add(key + '|' + (e.animationName || e.propertyName || ''));
+          window.__grainMoves.add(keyOf(e.target));
         }, true);
       }
       window.__grainImgs = { total: 0, loaded: 0 };
@@ -141,23 +160,14 @@ async function main() {
     console.log(`  ${String(mark).padEnd(4)} [${id.padEnd(18)}] ${detail}`);
   };
 
-  let pageEvalSource = '';
-
   for (const vp of VIEWPORTS) {
     console.log(`\n${vp.name} (${vp.width}px)`);
     await cdp.send('Emulation.setDeviceMetricsOverride', {
       width: vp.width, height: vp.height, deviceScaleFactor: 1, mobile: vp.name === 'phone',
     }, sessionId);
 
-    const loaded = new Promise((res) => {
-      const h = (ev) => {
-        const msg = JSON.parse(ev.data);
-        if (msg.method === 'Page.loadEventFired') { cdp.ws.removeEventListener('message', h); res(); }
-      };
-      cdp.ws.addEventListener('message', h);
-    });
     await cdp.send('Page.navigate', { url }, sessionId);
-    await Promise.race([loaded, new Promise((r) => setTimeout(r, 15000))]);
+    await waitForReady(cdp, sessionId);
     await new Promise((r) => setTimeout(r, 800));
 
     if (vp.name === 'phone') {
@@ -188,17 +198,18 @@ async function main() {
           return { tag: h.tagName.toLowerCase(), text: h.textContent.trim().slice(0, 60), lines, fontSize: px(cs.fontSize) };
         });
 
-        const paras = [...document.querySelectorAll('p, blockquote')];
+        const paras = [...document.querySelectorAll('p, blockquote')]
+          .filter((p) => !p.closest('footer, .caption, .credits, .credit, .note, .margin, .annotation'));
         out.statements = paras.map((p) => {
           const cs = getComputedStyle(p);
           return { fontSize: px(cs.fontSize), words: p.textContent.trim().split(/\\s+/).length };
         }).filter((s) => s.fontSize >= 24);
-        out.bodySize = paras.length ? Math.min(...paras.map((p) => px(getComputedStyle(p).fontSize))) : 16;
+        out.bodySize = px(getComputedStyle(document.body).fontSize) || 16;
 
         let gradients = 0, shadows = 0, backdrops = 0;
         for (const el of document.querySelectorAll('*')) {
           const cs = getComputedStyle(el);
-          if (cs.backgroundImage && cs.backgroundImage !== 'none' && !cs.backgroundImage.startsWith('none')) gradients++;
+          if (cs.backgroundImage && /gradient\\(/i.test(cs.backgroundImage)) gradients++;
           if (cs.boxShadow && cs.boxShadow !== 'none') shadows++;
           if (cs.backdropFilter && cs.backdropFilter !== 'none') backdrops++;
         }
@@ -217,13 +228,14 @@ async function main() {
         out.fontsLoaded = document.fonts ? document.fonts.status : 'n/a';
 
         const small = [];
+        const isNote = (el) => el.closest('figcaption, footer, small, .caption, .credits, .credit, .note, .margin, .annotation, .button, button, [data-caption]');
         for (const el of document.querySelectorAll('p, li, td, th, a, blockquote, span')) {
           const cs = getComputedStyle(el);
           const fs = px(cs.fontSize);
           const t = el.textContent.trim();
-          if (t.length > 12 && fs < 14 && cs.fontFamily && !/mono/i.test(cs.fontFamily)) {
+          if (t.length > 12 && fs < 15 && cs.fontFamily && !/mono/i.test(cs.fontFamily) && !isNote(el)) {
             const rects = el.getClientRects();
-            if (rects.length) small.push(Math.round(fs));
+            if (rects.length) small.push(Math.round(fs * 10) / 10);
           }
         }
         out.smallTextSizes = small;
@@ -234,7 +246,6 @@ async function main() {
     }, sessionId);
 
     const m = result.value || {};
-    pageEvalSource = url;
 
     if (vp.name === 'phone' && !allow.has('overflow')) {
       add('overflow', 'FAIL', (m.hOverflow || 0) <= 1, `horizontal overflow ${m.hOverflow}px`);
@@ -244,11 +255,11 @@ async function main() {
       badHeadlines.length ? `${badHeadlines.length} headline(s) over two lines: ${badHeadlines.slice(0, 3).map((h) => `"${h.text}" (${h.lines})`).join('; ')}`
         : `${(m.headlines || []).length} headlines, all two lines or fewer`);
     if (!allow.has('body-size')) {
-      add('body-size', 'FAIL', (m.bodySize || 16) >= 15, `smallest running text ${m.bodySize}px`);
+      add('body-size', 'FAIL', (m.bodySize || 16) >= 15, `body text ${m.bodySize}px`);
     }
     const small = (m.smallTextSizes || []);
     if (small.length > 0) {
-      add('body-size', 'FAIL', small.length <= 3, `${small.length} text runs under 14px (min ${Math.min(...small)}px)`);
+      add('small-text', 'FAIL', small.length <= 3, `${small.length} running text run(s) under 15px (min ${Math.min(...small)}px)`);
     }
     if (!allow.has('no-gradient')) {
       add('no-gradient', 'FAIL', (m.gradients || 0) === 0, `${m.gradients} element(s) with gradient backgrounds`);
@@ -294,6 +305,27 @@ async function main() {
     add('fonts', 'WARN', false, 'fonts still loading when measured');
   }
 
+  // reduced motion: content must stay visible when the user asks for less motion
+  if (!allow.has('reduced-motion')) {
+    await cdp.send('Emulation.setEmulatedMedia', {
+      features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
+    }, sessionId);
+    await cdp.send('Page.navigate', { url }, sessionId);
+    await waitForReady(cdp, sessionId);
+    await new Promise((r) => setTimeout(r, 400));
+    const { result: rm } = await cdp.send('Runtime.evaluate', {
+      expression: `(() => {
+        const els = [...document.querySelectorAll('[data-motion]')];
+        const hidden = els.filter((el) => getComputedStyle(el).opacity === '0');
+        return { total: els.length, hidden: hidden.length };
+      })()`,
+      returnByValue: true,
+    }, sessionId);
+    const v = rm?.value || { total: 0, hidden: 0 };
+    add('reduced-motion', 'FAIL', v.hidden === 0,
+      v.total ? `${v.hidden} of ${v.total} motion element(s) still hidden under prefers-reduced-motion` : 'no [data-motion] elements to check');
+  }
+
   const fails = checks.filter((c) => !c.ok && c.level === 'FAIL');
   const warns = checks.filter((c) => !c.ok && c.level === 'WARN');
 
@@ -312,7 +344,8 @@ async function main() {
 
   try { cdp.send('Browser.close'); } catch {}
   proc.kill('SIGTERM');
-  rmSync(udd, { recursive: true, force: true });
+  await new Promise((r) => setTimeout(r, 300));
+  try { rmSync(udd, { recursive: true, force: true }); } catch { /* the browser may still hold files; harmless */ }
 
   console.log(`\nScreenshots in ${SHOTS_DIR}/ — look at them; the meter is not the eye.`);
   if (fails.length === 0) {

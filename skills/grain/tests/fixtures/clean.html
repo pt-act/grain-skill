@@ -11,6 +11,7 @@
     --font-display: Georgia, serif; --font-text: system-ui, sans-serif;
   }
   * { box-sizing: border-box; }
+  img { display: block; max-width: 100%; height: auto; }
   body { margin: 0; background: var(--ground); color: var(--ink);
          font: 17px/1.55 var(--font-text); }
   h1 { font: 500 44px/1.05 var(--font-display); letter-spacing: -0.03em; margin: 32px 24px 16px; max-width: 900px; }
@@ -33,7 +34,7 @@
 <h1>The Ledger of Small Hours</h1>
 <p class="statement">A record of what the shop sells, who made it, and what it costs — set like the book it came from.</p>
 
-<img class="hero m1" src="img1.jpg" alt="The shopfront in morning light" data-motion>
+<div class="hero"><img class="m1" src="img1.jpg" alt="The shopfront in morning light" data-motion></div>
 <ul class="entries">
   <li data-motion class="m2"><span>No. 1 — The morning loaf, baked at five</span><span>4€</span></li>
   <li data-motion class="m3"><span>No. 2 — The rye, two days to ferment</span><span>6€</span></li>

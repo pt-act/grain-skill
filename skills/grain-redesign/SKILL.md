@@ -1,6 +1,6 @@
 ---
 name: grain-redesign
-description: Redesign an existing page: run the gate on it first (lint + browser inspector), critique its screenshots against the juror's rubric, then fix layout, spacing, hierarchy and styling — keeping the page's real content and working behaviour. Use this for a page that already exists and is underperforming, looks generic, or is in the way of its own content. Also draw a fresh direction with the grain scripts when the redesign is a restyle rather than a repair.
+description: "Redesign an existing page: run the gate on it first (lint + browser inspector), critique its screenshots against the juror's rubric, then fix layout, spacing, hierarchy and styling — keeping the page's real content and working behaviour. Use this for a page that already exists and is underperforming, looks generic, or is in the way of its own content. Also draw a fresh direction with the grain scripts when the redesign is a restyle rather than a repair."
 ---
 
 # Grain Redesign
@@ -62,7 +62,7 @@ State which you chose and why, in one line, in your notes and the report.
 ### 4. Rebuild and re-measure
 
 Run the grain pipeline from step 5 of the main skill (build still, gate, look,
-move) on the sections you changed. Do not re-lints the unchanged parts with a
+move) on the sections you changed. Do not re-lint the unchanged parts with a
 fresh eye and find last year's decisions wanting — the gate is on the whole
 page; fix new FAILs, defend WARNs you already knew about.
 

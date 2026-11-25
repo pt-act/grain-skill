@@ -1,6 +1,6 @@
 ---
 name: grain-quiet
-description: Grain Quiet — a calm, polished direction for product UI, studios and apps: soft contrast, generous whitespace, spring motion. Use this when the brief asks for restraint, premium minimalism, or an interface rather than a public page: dashboards, app screens, account areas, product surfaces where the work happens rather than the page that sells it. Not for landing pages or marketing sites (use grain-frontend).
+description: "Grain Quiet — a calm, polished direction for product UI, studios and apps: soft contrast, generous whitespace, spring motion. Use this when the brief asks for restraint, premium minimalism, or an interface rather than a public page: dashboards, app screens, account areas, product surfaces where the work happens rather than the page that sells it. Not for landing pages or marketing sites (use grain-frontend)."
 ---
 
 # Grain Quiet

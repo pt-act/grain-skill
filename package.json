@@ -1,0 +1,16 @@
+{
+  "name": "grain-skill",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "description": "Agent skills that give coding agents an art direction and a way to check their own work in a real browser.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "bash skills/grain/tests/run.sh --skip-browser",
+    "test:full": "bash skills/grain/tests/run.sh",
+    "lint:examples": "node skills/grain/scripts/lint.mjs examples"
+  }
+}
