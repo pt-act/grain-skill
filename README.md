@@ -25,8 +25,12 @@ Or add the marketplace and install the plugin:
 
 # Codex
 codex plugin marketplace add pt-act/grain-skill
-codex plugin install grain
+codex plugin add grain@grain-skill
 ```
+
+Then start a new session; the skills appear as `grain-frontend`,
+`grain-redesign` and `grain-quiet`. The Claude smoke test needs a machine with
+the Claude CLI and is not run in CI.
 
 Or symlink from a clone so `git pull` updates in place:
 

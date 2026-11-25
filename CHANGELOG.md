@@ -6,6 +6,20 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-11-25
+
+### Fixed
+
+- README Codex install command: `codex plugin add grain@grain-skill`. The
+  current CLI has no `install` subcommand.
+- Claude marketplace manifest: the description is now a top-level field, where
+  Claude Code reads it, instead of only under `metadata`.
+
+### Notes
+
+- The Claude marketplace smoke test (install, then confirm the three skills
+  load) needs a machine with the Claude CLI; it is not run in CI.
+
 ## [0.1.2] - 2026-11-25
 
 The listing pass. Adds the two install surfaces a marketplace expects and a
