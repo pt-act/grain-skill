@@ -33,8 +33,7 @@ The inspector needs Chrome, Edge, Chromium, or Brave. Screenshots land in
 
 The window and columns heroes carry no photograph by design, so the
 `hero-media` warning is expected on those pages and is defended rather than
-fixed. Every other warning is either fixed or explained in the page's own
-comments.
+fixed. Every other warning is either fixed or explained here.
 
 ## Replacing the content
 
