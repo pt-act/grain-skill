@@ -1,0 +1,36 @@
+# Grain Skill
+
+> Agent skills that give coding agents an art direction and a real-browser gate.
+
+Install: `npx skills add https://github.com/pt-act/grain-skill`
+
+## Skills
+
+- [grain-frontend](skills/grain/SKILL.md): Grain, the anti-slop frontend skill. Art direction for public-facing websites, dealt from a library of twelve directions and a working shelf of studied sites; real pictures found in open archives; a real-browser inspector that fails the page on the house rules. Use this whenever you build, design, redesign or review a landing page, marketing site, portfolio, product page, one-pager, event page or any public-facing web page, in any stack — also when the user says a page looks generic, templated, "AI-made" or sloppy, or asks to make it look designed, premium or less like every other site. Not for dashboards or app screens.
+- [grain-quiet](skills/grain-quiet/SKILL.md): Grain Quiet — a calm, polished direction for product UI, studios and apps: soft contrast, generous whitespace, spring motion. Use this when the brief asks for restraint, premium minimalism, or an interface rather than a public page: dashboards, app screens, account areas, product surfaces where the work happens rather than the page that sells it. Not for landing pages or marketing sites (use grain-frontend).
+- [grain-redesign](skills/grain-redesign/SKILL.md): Redesign an existing page: run the gate on it first (lint + browser inspector), critique its screenshots against the juror's rubric, then fix layout, spacing, hierarchy and styling — keeping the page's real content and working behaviour. Use this for a page that already exists and is underperforming, looks generic, or is in the way of its own content. Also draw a fresh direction with the grain scripts when the redesign is a restyle rather than a repair.
+
+## Scripts
+
+- [assets.mjs](skills/grain/scripts/assets.mjs): find real pictures of the subject's world in open archives
+- [doctor.mjs](skills/grain/scripts/doctor.mjs): where does this build stand? Run it in any build folder.
+- [draw.mjs](skills/grain/scripts/draw.mjs): deal art directions and print a direction sheet for a build.
+- [env.mjs](skills/grain/scripts/env.mjs): shared environment probing: browser, network, Node.
+- [inspect.mjs](skills/grain/scripts/inspect.mjs): measure the page in a real browser and fail it on the house rules.
+- [lint.mjs](skills/grain/scripts/lint.mjs): scan source for the banned devices of the house style.
+- [preflight.mjs](skills/grain/scripts/preflight.mjs): run this first, in the project root, before any build step.
+- [report.mjs](skills/grain/scripts/report.mjs): the step-10 report, drafted from the build state.
+- [state.mjs](skills/grain/scripts/state.mjs): the build state store.
+- [tokens.mjs](skills/grain/scripts/tokens.mjs): emit the :root tokens and font links from the dealt sheet.
+
+## Examples
+
+- [wine-bar](examples/wine-bar/index.html): a wine bar built with The Ledger direction.
+- [mountain-hut](examples/mountain-hut/index.html): a mountain refuge built with The Atlas direction.
+- [studio](examples/studio/index.html): a ceramics studio built with The Blueprint direction.
+
+## Repo
+
+- [README.md](README.md): install, the run, the house rules.
+- [CHANGELOG.md](CHANGELOG.md): releases.
+- [scripts/llms.mjs](scripts/llms.mjs): regenerates this file (`--check` for CI).

@@ -22,6 +22,9 @@ echo "== fixtures present =="
 [ -f "$FIX/sloppy.html" ] || fail "missing $FIX/sloppy.html"
 for img in "$FIX"/img*.jpg; do [ -f "$img" ] || fail "missing fixture image $img"; done
 
+echo "== llms.txt in sync =="
+node scripts/llms.mjs --check >/dev/null || fail "llms.txt is out of date"
+
 echo "== lint catches the sloppy page =="
 if node "$S/lint.mjs" "$FIX/sloppy.html" >"$WORK/lint-sloppy.txt" 2>&1; then
   fail "lint passed on sloppy.html — it should fail"

@@ -23,6 +23,9 @@ jobs:
       - name: Lint the examples
         run: node skills/grain/scripts/lint.mjs examples
 
+      - name: Check llms.txt is in sync
+        run: node scripts/llms.mjs --check
+
       - name: Run the grain self-test
         env:
           GRAIN_BROWSER: ${{ steps.chrome.outputs.chrome-path }}

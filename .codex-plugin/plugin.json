@@ -1,0 +1,37 @@
+{
+  "name": "grain",
+  "version": "0.1.2",
+  "description": "Art direction for public-facing websites, dealt from a library of twelve directions; real pictures from open archives; a real-browser inspector that fails the page on the house rules.",
+  "author": {
+    "name": "Grain Skill contributors",
+    "url": "https://github.com/pt-act/grain-skill"
+  },
+  "homepage": "https://github.com/pt-act/grain-skill",
+  "repository": "https://github.com/pt-act/grain-skill",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "frontend",
+    "design",
+    "art-direction",
+    "web-design"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Grain Skill",
+    "shortDescription": "Art direction and a real-browser gate for coding agents.",
+    "longDescription": "Grain deals an art direction from a library of twelve, finds real pictures in open archives, and checks the built page in a real browser against the house rules. It also ships a redesign skill and a calm product-UI skill.",
+    "defaultPrompt": [
+      "Build this landing page with a dealt direction and the grain gate.",
+      "Redesign this page: run the gate, critique the screenshots, fix the top three.",
+      "Give this product UI a calm, polished direction."
+    ],
+    "developerName": "Grain Skill contributors",
+    "category": "Design",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/pt-act/grain-skill"
+  }
+}

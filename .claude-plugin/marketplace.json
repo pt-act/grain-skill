@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "grain-skill",
+  "version": "0.1.2",
+  "metadata": {
+    "description": "Agent skills that give coding agents an art direction and a real-browser gate.",
+    "version": "0.1.2"
+  },
+  "owner": {
+    "name": "Grain Skill contributors",
+    "email": "pt-act@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "grain",
+      "source": "./",
+      "description": "Art direction for public-facing websites, dealt from a library of twelve directions; real pictures from open archives; a real-browser inspector that fails the page on the house rules.",
+      "version": "0.1.2",
+      "author": {
+        "name": "Grain Skill contributors"
+      },
+      "homepage": "https://github.com/pt-act/grain-skill",
+      "repository": "https://github.com/pt-act/grain-skill",
+      "license": "MIT",
+      "keywords": [
+        "agent-skills",
+        "frontend",
+        "design",
+        "art-direction",
+        "web-design"
+      ],
+      "category": "design"
+    }
+  ]
+}

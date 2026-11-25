@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// report.mjs — the step-10 report, drafted from the build state. The agent
-// records what only it knows (idea, live thing, sections built, sample
-// content), then prints the draft; edit, don't rewrite.
+// report.mjs — the step-10 report, drafted from the build state.
+// The agent records what only it knows (idea, live thing, sections built,
+// sample content), then prints the draft; edit, don't rewrite.
 //
 //   node report.mjs                          print the draft report
 //   node report.mjs --idea "sentence"        record the idea sentence

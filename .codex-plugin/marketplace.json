@@ -1,0 +1,20 @@
+{
+  "name": "grain-skill",
+  "interface": {
+    "displayName": "Grain Skill"
+  },
+  "plugins": [
+    {
+      "name": "grain",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Design"
+    }
+  ]
+}

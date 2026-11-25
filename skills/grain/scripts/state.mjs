@@ -1,6 +1,7 @@
-// state.mjs — the build state store. Every script that produces durable
-// output records it here (direction, pictures, gates); report.mjs and
-// doctor.mjs read it. Writes are atomic; corrupt files are archived, not fatal.
+// state.mjs — the build state store.
+// Every script that produces durable output records it here (direction,
+// pictures, gates); report.mjs and doctor.mjs read it. Writes are atomic;
+// corrupt files are archived, not fatal.
 
 import { readFileSync, writeFileSync, renameSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';

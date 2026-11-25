@@ -16,6 +16,18 @@ nothing in it was decided.** Grain replaces those defaults with decisions.
 npx skills add https://github.com/pt-act/grain-skill
 ```
 
+Or add the marketplace and install the plugin:
+
+```bash
+# Claude Code
+/plugin marketplace add pt-act/grain-skill
+/plugin install grain@grain-skill
+
+# Codex
+codex plugin marketplace add pt-act/grain-skill
+codex plugin install grain
+```
+
 Or symlink from a clone so `git pull` updates in place:
 
 ```bash

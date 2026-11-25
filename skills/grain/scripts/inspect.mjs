@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// inspect.mjs — measure the page in a real browser and fail it on the house
-// rules. Drives Chrome, Edge, Chromium or Brave over the DevTools protocol with no
+// inspect.mjs — measure the page in a real browser and fail it on the house rules.
+// Drives Chrome, Edge, Chromium or Brave over the DevTools protocol with no
 // dependencies (Node 22's built-in WebSocket).
 //
 //   node inspect.mjs <url or path/to/index.html> [--allow <rule>]

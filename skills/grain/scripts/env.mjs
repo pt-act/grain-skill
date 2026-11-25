@@ -1,5 +1,5 @@
-// env.mjs — shared environment probing: which browser is installed, whether
-// the open archives are reachable. Used by preflight.mjs and inspect.mjs.
+// env.mjs — shared environment probing: browser, network, Node.
+// Used by preflight.mjs and inspect.mjs.
 
 import { existsSync } from 'node:fs';
 

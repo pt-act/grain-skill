@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-// tokens.mjs — from the dealt direction, emit the :root custom-property block
-// and the font-loading <link> lines verbatim. Paste them into the page; do not
-// hand-copy hexes from the sheet.
+// tokens.mjs — emit the :root tokens and font links from the dealt sheet.
+// Paste them into the page; do not hand-copy hexes from the sheet.
 //
 //   node tokens.mjs [--css] [--html]
 //

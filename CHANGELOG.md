@@ -6,6 +6,26 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-25
+
+The listing pass. Adds the two install surfaces a marketplace expects and a
+machine-readable index, without touching the direction library.
+
+### Added
+
+- `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json`, so the
+  repo installs in Claude Code with `/plugin marketplace add pt-act/grain-skill`
+  and `/plugin install grain@grain-skill`.
+- `.codex-plugin/marketplace.json` and `.codex-plugin/plugin.json`, so the
+  repo installs in Codex with `codex plugin marketplace add pt-act/grain-skill`.
+- `llms.txt` and `scripts/llms.mjs` (with `--check`), a machine-readable index
+  of the three skills and the script surface. CI fails when the index drifts.
+- README install section for the marketplace paths.
+
+### Changed
+
+- `library/version.js` is now `0.1.2`.
+
 ## [0.1.1] - 2026-11-25
 
 The public-release pass. The direction library is unchanged; this release
